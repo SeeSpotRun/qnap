@@ -70,7 +70,7 @@ class DeleteFileTestCase(unittest.TestCase):
     def runTest(self):
         # The delete call will fail since the demo QNAP server is read-only
         delete_result = filestation.delete('/Multimedia/Sample/picture/sample001.jpg')
-        print delete_result
+        print(delete_result)
         self.assertIsNotNone(delete_result)
         self.assertIsNotNone(delete_result['success'])
 
