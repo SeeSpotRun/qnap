@@ -4,7 +4,7 @@ from qnap.filestation import FileStation
 
 logging.disable(logging.CRITICAL)
 
-host = 'usademo.myqnapcloud.com'
+host = 'usanasdemo.myqnapcloud.com'
 user = 'qnap'
 password = 'qnap'
 
