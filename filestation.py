@@ -1,4 +1,5 @@
 import os
+import xmltodict
 
 from qnap import Qnap
 
@@ -140,3 +141,26 @@ class FileStation(Qnap):
                 'saveKey': 'no'
             }
         )
+
+    def get_volumes(self):
+        """
+        Get list of volumes
+        """
+        resp = self.req(
+            self.endpoint(
+                cgi='management/chartReq.cgi',
+                params={
+                    'chart_func': 'disk_usage',
+                    'disk_select': 'all',
+                    'include': 'all'
+                }
+            ))
+
+        data = xmltodict.parse(resp, force_list=("volume"))['QDocRoot']
+        result={}
+        for vol in data['volumeList']['volume']:
+            key = vol["volumeValue"]
+            label = vol["volumeLabel"] if "volumeLabel" in vol else "Volume " + vol["volumeValue"]
+            result[key] = label
+
+        return result
