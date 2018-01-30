@@ -87,5 +87,11 @@ class UploadFileTestCase(unittest.TestCase):
         self.assertIsNotNone(upload_result)
         self.assertIsNotNone(upload_result['success'])
 
+class ListVolumesTestCase(unittest.TestCase):
+    def runTest(self):
+        volumes = filestation.get_volumes()
+        self.assertTrue(len(volumes) > 0)
+
+
 if __name__ == '__main__':
     unittest.main()
