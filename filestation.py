@@ -114,3 +114,29 @@ class FileStation(Qnap):
                 )
             }
         )
+
+    def unlock(self, volumeID, keyStr):
+        """
+        Unlock encrypted volume
+        """
+        return self.req_post(
+            self.endpoint(cgi='disk/disk_manage.cgi'),
+            data={
+                'func': 'open_encrypt_dev',
+                'volumeID': volumeID,
+                'keyStr': keyStr,
+                'saveKey': 'no'
+            }
+        )
+
+    def lock(self, volumeID):
+        """
+        Lock encrypted volume
+        """
+        return self.req_post(self.endpoint(cgi='disk/disk_manage.cgi'),
+            data={
+                'func': 'close_encrypt_dev',
+                'volumeID': volumeID,
+                'saveKey': 'no'
+            }
+        )
